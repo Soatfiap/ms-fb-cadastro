@@ -3,7 +3,6 @@
  Micro serviço de Cadastro
 </h1>
  <h2 align="center">
-    < 📜 > <br>
  PÓS TECH - SOFTWARE ARCHITECTURE
 </h2>       
     <h2 align="center">
