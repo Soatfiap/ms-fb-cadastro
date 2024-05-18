@@ -15,11 +15,12 @@ import net.fiap.postech.fastburger.adapters.persistence.mapper.ClientMapper;
 import net.fiap.postech.fastburger.application.domain.Client;
 import net.fiap.postech.fastburger.application.ports.inputports.client.FindClientByCpfGateway;
 import net.fiap.postech.fastburger.application.ports.inputports.client.SaveClientGateway;
-import org.hibernate.annotations.NotFound;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import software.amazon.awssdk.services.cognitosync.model.ResourceNotFoundException;
 
 import java.util.Optional;
 
@@ -49,7 +50,7 @@ public class ClientController {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = Client.class))
                     }),
                     @ApiResponse(responseCode = "404", description = "Não foi encontrado cliente vinculado ao CPF", content = {
-                            @Content(mediaType = "application/json", schema = @Schema(implementation = NotFound.class))
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ResourceNotFoundException.class))
                     })
             }
     )

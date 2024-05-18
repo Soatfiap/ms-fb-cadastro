@@ -1,11 +1,18 @@
 package net.fiap.postech.fastburger.adapters.persistence.entities;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.fiap.postech.fastburger.application.domain.enums.CategoryEnum;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
@@ -13,25 +20,25 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "products")
+@Document(collection = "products")
 public class ProductEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long SKU;
+    @Field("_id")
+    private String id;
+
+    @Indexed(unique = true)
+    @Field("SKU")
+    private Long sku;
+
     private String name;
 
-    @Enumerated(EnumType.STRING)
+
+    @Field("category")
     private CategoryEnum categoryEnum;
     private Double price;
     private String description;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "product_image",
-            joinColumns = {@JoinColumn(name = "product_id")},
-            inverseJoinColumns = {@JoinColumn(name = "image_id")}
-    )
+    @Field("images")
     private List<ProductImageEntity> images;
 }

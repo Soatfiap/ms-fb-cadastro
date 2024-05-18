@@ -22,9 +22,9 @@ public class UpdateProductAdapter implements UpdateProductOutPutPort {
     @Override
     public Product update(String sku, Product product) {
 
-        var productEntity = this.productRepository.findById(Long.parseLong(sku));
+        var productEntity = this.productRepository.findBySku(Long.parseLong(sku));
         var productEntityToSave = this.productMapper.domainToEntity(product);
-        productEntityToSave.setSKU(productEntity.get().getSKU());
+        productEntityToSave.setSku(productEntity.get().getSku());
         return this.productMapper.toDomain(this.productRepository.save(productEntityToSave));
     }
 }
