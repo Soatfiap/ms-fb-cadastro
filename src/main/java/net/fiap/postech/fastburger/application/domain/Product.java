@@ -8,6 +8,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
+    private String id;
     private Long SKU;
     private String name;
     private CategoryEnum categoryEnum;

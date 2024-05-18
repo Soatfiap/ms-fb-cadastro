@@ -1,14 +1,17 @@
 package net.fiap.postech.fastburger.adapters.persistence.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import net.fiap.postech.fastburger.adapters.persistence.entities.ProductEntity;
 import net.fiap.postech.fastburger.application.domain.enums.CategoryEnum;
 
-@Repository
-public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
+
+public interface ProductRepository extends MongoRepository<ProductEntity, String> {
     List<ProductEntity> findProductEntityByCategoryEnum(CategoryEnum categoryEnum);
+    void deleteBySku(Long sku);
+    Optional<ProductEntity> findBySku(Long sku);
 }

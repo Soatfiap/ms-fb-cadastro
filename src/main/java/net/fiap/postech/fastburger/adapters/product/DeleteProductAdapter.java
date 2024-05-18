@@ -18,10 +18,10 @@ public class DeleteProductAdapter implements DeleteProductOutPutPort {
 
     @Override
     public Void delete(String sku) {
-        var prodcutToDelete = this.productRepository.findById(Long.parseLong(sku));
+        var prodcutToDelete = this.productRepository.findBySku(Long.parseLong(sku));
         if (!prodcutToDelete.isPresent())
             throw new ProductNotFoundException("Produto não encontrado.");
-        this.productRepository.deleteById(Long.parseLong(sku));
+        this.productRepository.deleteBySku(Long.parseLong(sku));
         return null;
     }
 }

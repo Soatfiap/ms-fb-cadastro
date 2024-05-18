@@ -1,6 +1,7 @@
 package net.fiap.postech.fastburger.adapters.controllers;
 
 import com.fasterxml.jackson.databind.annotation.NoClass;
+import feign.FeignException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -21,11 +22,12 @@ import net.fiap.postech.fastburger.application.ports.inputports.product.DeletePr
 import net.fiap.postech.fastburger.application.ports.inputports.product.FindProductByCategoryGateway;
 import net.fiap.postech.fastburger.application.ports.inputports.product.SaveProductGateway;
 import net.fiap.postech.fastburger.application.ports.inputports.product.UpdateProductGateway;
-import org.hibernate.annotations.NotFound;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import software.amazon.awssdk.services.cognitosync.model.ResourceNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +85,7 @@ public class ProductController {
                             @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Product.class)))
                     }),
                     @ApiResponse(responseCode = "404", description = "Produtos não encontrados para esta categoria", content = {
-                            @Content(mediaType = "application/json", schema = @Schema(implementation = NotFound.class))
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ResourceNotFoundException.class))
                     })
             }
     )
@@ -103,7 +105,7 @@ public class ProductController {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = Product.class))
                     }),
                     @ApiResponse(responseCode = "404", description = "Produto não encontrado", content = {
-                            @Content(mediaType = "application/json", schema = @Schema(implementation = NotFound.class))
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ResourceNotFoundException.class))
                     })
             }
     )
@@ -122,7 +124,7 @@ public class ProductController {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = NoClass.class))
                     }),
                     @ApiResponse(responseCode = "404", description = "Produto não encontrado", content = {
-                            @Content(mediaType = "application/json", schema = @Schema(implementation = NotFound.class))
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ResourceNotFoundException.class))
                     })
             }
     )

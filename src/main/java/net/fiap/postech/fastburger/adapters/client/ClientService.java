@@ -13,13 +13,13 @@ import software.amazon.awssdk.services.cognitoidentityprovider.model.AttributeTy
 @Service
 public class ClientService {
 
-    @Value("${aws_access_key_id}")
+
     private String awsClientId;
 
-    @Value("${aws_secret_access_key}")
+
     private String awsClientSecret;
 
-    @Value("${aws_cognito_user_pool_id}")
+
     private String awsUserPollCognito;
 
     public AdminCreateUserResponse saveClientOnCognito(Client client) {

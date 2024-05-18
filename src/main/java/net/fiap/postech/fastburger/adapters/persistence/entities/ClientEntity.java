@@ -1,26 +1,34 @@
 package net.fiap.postech.fastburger.adapters.persistence.entities;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "clients")
-public class ClientEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Document(collection = "clients")
 
-    @Column(unique = true)
+public class ClientEntity {
+
+    @Id
+    @Field("_id")
+    private String id;
+
+    @Indexed(unique = true)
+    @Field("cpf")
     private String cpf;
+
+    @Field("nome")
     private String nome;
 
-    @Column(unique = true)
+    @Indexed(unique = true)
+    @Field("email")
     private String email;
 }
