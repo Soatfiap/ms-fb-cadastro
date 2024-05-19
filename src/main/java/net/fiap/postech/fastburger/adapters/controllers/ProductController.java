@@ -133,7 +133,7 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}")
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(description = "Busca produto por id", method = "GET")
     @ApiResponses(
