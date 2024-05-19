@@ -109,8 +109,8 @@ public class ProductController {
                     })
             }
     )
-    public ResponseEntity<ProductResponseDTO> updateProduct(@PathParam("sku") Long sku, @Valid @RequestBody ProductDTO productDTO) {
-        var productUpdated = this.updateProductGateway.update(sku.toString(), this.productMapper.dtoToDomain(productDTO));
+    public ResponseEntity<ProductResponseDTO> updateProduct(@PathParam("sku") String sku, @Valid @RequestBody ProductDTO productDTO) {
+        var productUpdated = this.updateProductGateway.update(sku, this.productMapper.dtoToDomain(productDTO));
         return ResponseEntity.status(HttpStatus.OK).body(this.productMapper.domainToDTOResponse(productUpdated));
     }
 
@@ -128,8 +128,8 @@ public class ProductController {
                     })
             }
     )
-    public ResponseEntity<Void> deleteProductBySKU(@PathVariable("sku") Long sku) {
-        this.deleteProductGateway.delete(sku.toString());
+    public ResponseEntity<Void> deleteProductBySKU(@PathVariable("sku") String sku) {
+        this.deleteProductGateway.delete(sku);
         return ResponseEntity.noContent().build();
     }
 }

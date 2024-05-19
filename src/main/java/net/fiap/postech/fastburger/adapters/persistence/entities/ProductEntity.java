@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.fiap.postech.fastburger.application.domain.enums.CategoryEnum;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -24,19 +24,18 @@ import java.util.List;
 public class ProductEntity {
 
     @Id
-    @Field("_id")
-    private String id;
+    private String sku;
 
-    @Indexed(unique = true)
-    @Field("SKU")
-    private Long sku;
-
+    @Field("name")
     private String name;
 
 
     @Field("category")
     private CategoryEnum categoryEnum;
+
+    @Field("price")
     private Double price;
+    @Field("description")
     private String description;
 
     @Field("images")
