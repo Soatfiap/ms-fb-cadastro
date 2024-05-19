@@ -1,10 +1,7 @@
 version: "3.2"
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    #    image: 4soatg44/ms-fb-cadastro:1.0.0
+    image: 4soatg44/ms-fb-cadastro:1.0.0
     ports:
       - "8082:8080"
     depends_on:
@@ -22,9 +19,9 @@ services:
       MERCADO_API: "https://api.mercadopago.com"
       SPRING_DATA_MONGODB_HOST: "44.212.233.147"
       SPRING_DATA_MONGODB_PORT: "27017"
-      SPRING_DATA_MONGODB_DATABASE: "fastburger"
-      SPRING_DATA_MONGODB_USERNAME: "deckbuilder"
-      SPRING_DATA_MONGODB_PASSWORD: "gzeqPuVU6uju7nLxibTt"
+      SPRING_DATA_MONGODB_DATABASE: ""
+      SPRING_DATA_MONGODB_USERNAME: ""
+      SPRING_DATA_MONGODB_PASSWORD: ""
       SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE: "admin"
     networks:
       - netChallenge
