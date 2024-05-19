@@ -1,6 +1,7 @@
 <h1 align="center">
     < 📜 > <br>
- Micro serviço de Cadastro
+ Micro serviço de Cadastro<br>
+        ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Soatfiap/ms-fb-cadastro/maven.yml)
 </h1>
  <h2 align="center">
  PÓS TECH - SOFTWARE ARCHITECTURE
