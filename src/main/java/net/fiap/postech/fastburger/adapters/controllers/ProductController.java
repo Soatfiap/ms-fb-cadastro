@@ -18,10 +18,7 @@ import net.fiap.postech.fastburger.adapters.persistence.mapper.ProductMapper;
 import net.fiap.postech.fastburger.application.domain.Client;
 import net.fiap.postech.fastburger.application.domain.Product;
 import net.fiap.postech.fastburger.application.domain.enums.CategoryEnum;
-import net.fiap.postech.fastburger.application.ports.inputports.product.DeleteProductGateway;
-import net.fiap.postech.fastburger.application.ports.inputports.product.FindProductByCategoryGateway;
-import net.fiap.postech.fastburger.application.ports.inputports.product.SaveProductGateway;
-import net.fiap.postech.fastburger.application.ports.inputports.product.UpdateProductGateway;
+import net.fiap.postech.fastburger.application.ports.inputports.product.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,6 +37,8 @@ public class ProductController {
     private final SaveProductGateway saveProductGateway;
     private final FindProductByCategoryGateway findProductByCategoryGateway;
 
+    private final FindProductByIdGateway findProductByIdGateway;
+
     private final DeleteProductGateway deleteProductGateway;
     private final UpdateProductGateway updateProductGateway;
     private final ProductMapper productMapper;
@@ -47,11 +46,12 @@ public class ProductController {
     @Autowired
     public ProductController(SaveProductGateway saveProductGateway,
                              ProductMapper productMapper,
-                             FindProductByCategoryGateway findProductByCategoryGateway,
+                             FindProductByCategoryGateway findProductByCategoryGateway, FindProductByIdGateway findProductByIdGateway,
                              UpdateProductGateway updateProductGateway,
                              DeleteProductGateway deleteProductGateway) {
         this.saveProductGateway = saveProductGateway;
         this.productMapper = productMapper;
+        this.findProductByIdGateway = findProductByIdGateway;
         this.updateProductGateway = updateProductGateway;
         this.findProductByCategoryGateway = findProductByCategoryGateway;
         this.deleteProductGateway = deleteProductGateway;
@@ -115,9 +115,8 @@ public class ProductController {
     }
 
     @DeleteMapping("/{sku}")
-    @PutMapping("/{sku}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(description = "Atualiza produto por SKU", method = "GET")
+    @Operation(description = "Deleta produto por SKU", method = "DELET")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "204", description = "Deleção realizada com sucesso", content = {
@@ -131,5 +130,23 @@ public class ProductController {
     public ResponseEntity<Void> deleteProductBySKU(@PathVariable("sku") Long sku) {
         this.deleteProductGateway.delete(sku.toString());
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(description = "Busca produto por id", method = "GET")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Atualização realizada com sucesso", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Product.class))
+                    }),
+                    @ApiResponse(responseCode = "404", description = "Produto não encontrado", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = ResourceNotFoundException.class))
+                    })
+            }
+    )
+    public ResponseEntity<ProductResponseDTO> findProductById(@PathVariable("id") Long id) {
+        var productUpdated = this.findProductByIdGateway.find(id);
+        return ResponseEntity.status(HttpStatus.OK).body(this.productMapper.domainToDTOResponse(productUpdated));
     }
 }

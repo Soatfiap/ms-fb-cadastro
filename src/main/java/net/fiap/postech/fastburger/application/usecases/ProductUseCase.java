@@ -10,24 +10,23 @@ import net.fiap.postech.fastburger.application.ports.inputports.product.DeletePr
 import net.fiap.postech.fastburger.application.ports.inputports.product.FindProductByCategoryGateway;
 import net.fiap.postech.fastburger.application.ports.inputports.product.SaveProductGateway;
 import net.fiap.postech.fastburger.application.ports.inputports.product.UpdateProductGateway;
-import net.fiap.postech.fastburger.application.ports.outputports.product.DeleteProductOutPutPort;
-import net.fiap.postech.fastburger.application.ports.outputports.product.FindProductByCategoryOutPutPort;
-import net.fiap.postech.fastburger.application.ports.outputports.product.SaveProductOutPutPort;
-import net.fiap.postech.fastburger.application.ports.outputports.product.UpdateProductOutPutPort;
+import net.fiap.postech.fastburger.application.ports.outputports.product.*;
 
-public class ProductUseCase implements SaveProductGateway, UpdateProductGateway, DeleteProductGateway, FindProductByCategoryGateway {
+public class ProductUseCase implements SaveProductGateway, UpdateProductGateway, DeleteProductGateway, FindProductByCategoryGateway, FindProductByIdOutPutPort {
 
     private final SaveProductOutPutPort saveProduct;
     private final UpdateProductOutPutPort updateProduct;
     private final DeleteProductOutPutPort deleteProduct;
     private final FindProductByCategoryOutPutPort findProductByCategory;
+    private final FindProductByIdOutPutPort findProductById;
 
     public ProductUseCase(SaveProductOutPutPort saveProduct, UpdateProductOutPutPort updateProduct, DeleteProductOutPutPort deleteProduct,
-                          FindProductByCategoryOutPutPort findProductByCategory) {
+                          FindProductByCategoryOutPutPort findProductByCategory, FindProductByIdOutPutPort findProductById) {
         this.saveProduct = saveProduct;
         this.updateProduct = updateProduct;
         this.deleteProduct = deleteProduct;
         this.findProductByCategory = findProductByCategory;
+        this.findProductById = findProductById;
     }
 
     @Override
@@ -57,5 +56,13 @@ public class ProductUseCase implements SaveProductGateway, UpdateProductGateway,
         if (products.isEmpty())
             throw new ProductNotFoundException("Não foram encontrados produtos para esta categoria");
         return products;
+    }
+
+    @Override
+    public Product find(Long id) {
+        Product product = this.findProductById.find(id);
+        if (product == null)
+            throw new ProductNotFoundException("Não foram encontrados produtos para este id");
+        return product;
     }
 }
