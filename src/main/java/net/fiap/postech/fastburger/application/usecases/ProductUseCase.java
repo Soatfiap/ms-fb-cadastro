@@ -6,13 +6,11 @@ import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.Busin
 import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.ProductNotFoundException;
 import net.fiap.postech.fastburger.application.domain.Product;
 import net.fiap.postech.fastburger.application.domain.enums.CategoryEnum;
-import net.fiap.postech.fastburger.application.ports.inputports.product.DeleteProductGateway;
-import net.fiap.postech.fastburger.application.ports.inputports.product.FindProductByCategoryGateway;
-import net.fiap.postech.fastburger.application.ports.inputports.product.SaveProductGateway;
-import net.fiap.postech.fastburger.application.ports.inputports.product.UpdateProductGateway;
+import net.fiap.postech.fastburger.application.ports.inputports.product.*;
 import net.fiap.postech.fastburger.application.ports.outputports.product.*;
 
-public class ProductUseCase implements SaveProductGateway, UpdateProductGateway, DeleteProductGateway, FindProductByCategoryGateway, FindProductByIdOutPutPort {
+public class ProductUseCase implements SaveProductGateway, UpdateProductGateway, DeleteProductGateway,
+        FindProductByCategoryGateway, FindProductByIdGateway {
 
     private final SaveProductOutPutPort saveProduct;
     private final UpdateProductOutPutPort updateProduct;

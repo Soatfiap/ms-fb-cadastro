@@ -46,7 +46,8 @@ public class ProductController {
     @Autowired
     public ProductController(SaveProductGateway saveProductGateway,
                              ProductMapper productMapper,
-                             FindProductByCategoryGateway findProductByCategoryGateway, FindProductByIdGateway findProductByIdGateway,
+                             FindProductByCategoryGateway findProductByCategoryGateway,
+                             FindProductByIdGateway findProductByIdGateway,
                              UpdateProductGateway updateProductGateway,
                              DeleteProductGateway deleteProductGateway) {
         this.saveProductGateway = saveProductGateway;
