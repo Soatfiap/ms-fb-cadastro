@@ -6,5 +6,5 @@ import net.fiap.postech.fastburger.application.domain.enums.CategoryEnum;
 import java.util.List;
 
 public interface FindProductByIdGateway {
-    Product find(Long id);
+    Product find(String id);
 }

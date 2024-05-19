@@ -57,7 +57,7 @@ public class ProductUseCase implements SaveProductGateway, UpdateProductGateway,
     }
 
     @Override
-    public Product find(Long id) {
+    public Product find(String id) {
         Product product = this.findProductById.find(id);
         if (product == null)
             throw new ProductNotFoundException("Não foram encontrados produtos para este id");

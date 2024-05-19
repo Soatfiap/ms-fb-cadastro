@@ -12,6 +12,6 @@ import net.fiap.postech.fastburger.application.domain.enums.CategoryEnum;
 
 public interface ProductRepository extends MongoRepository<ProductEntity, String> {
     List<ProductEntity> findProductEntityByCategoryEnum(CategoryEnum categoryEnum);
-    void deleteBySku(Long sku);
-    Optional<ProductEntity> findBySku(Long sku);
+    void deleteBySku(String sku);
+    Optional<ProductEntity> findBySku(String sku);
 }

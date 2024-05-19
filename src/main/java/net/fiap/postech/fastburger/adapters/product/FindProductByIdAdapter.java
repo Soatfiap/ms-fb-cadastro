@@ -19,7 +19,7 @@ public class FindProductByIdAdapter implements FindProductByIdOutPutPort {
     }
 
     @Override
-    public Product find(Long id) {
+    public Product find(String id) {
         var productEntity = this.productRepository.findById(id.toString());
         return this.productMapper.toDomain(productEntity.orElseThrow(() -> new RuntimeException("Product not found")));
     }
