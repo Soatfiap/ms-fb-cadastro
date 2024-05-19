@@ -138,7 +138,7 @@ public class ProductController {
     @Operation(description = "Busca produto por id", method = "GET")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Atualização realizada com sucesso", content = {
+                    @ApiResponse(responseCode = "200", description = "Produto encontrado com sucesso.", content = {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = Product.class))
                     }),
                     @ApiResponse(responseCode = "404", description = "Produto não encontrado", content = {
