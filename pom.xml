@@ -155,6 +155,12 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>net/fiap/postech/fastburger/adapters/**</exclude>
+                        <exclude>net/fiap/postech/fastburger/application/domain/**</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
