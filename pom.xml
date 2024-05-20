@@ -20,7 +20,9 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.exclusions>**/net/fiap/postech/fastburger/application/domain/**/*,
             **/net/fiap/postech/fastburger/adapters/**/*,
-            **/net/fiap/postech/fastburger/application/ports/**/*
+            **/net/fiap/postech/fastburger/application/ports/**/*,
+            **/net/fiap/postech/fastburger/FastburgerApplication.java,
+
         </sonar.exclusions>
     </properties>
     <dependencyManagement>
