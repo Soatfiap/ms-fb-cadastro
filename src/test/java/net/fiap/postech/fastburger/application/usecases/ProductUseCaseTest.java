@@ -1,5 +1,7 @@
 package net.fiap.postech.fastburger.application.usecases;
 
+import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.BusinessException;
+import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.ProductNotFoundException;
 import net.fiap.postech.fastburger.application.domain.Product;
 import net.fiap.postech.fastburger.application.domain.enums.CategoryEnum;
 import net.fiap.postech.fastburger.application.ports.outputports.product.*;
@@ -52,6 +54,20 @@ class ProductUseCaseTest {
     }
 
     @Test
+    void save_withInvalidPrice_throwsBusinessException() {
+        Product product = new Product();
+        product.setPrice(0.0);
+        assertThrows(BusinessException.class, () -> productUseCase.save(product));
+    }
+
+    @Test
+    void save_withNegativePrice_throwsBusinessException() {
+        Product product = new Product();
+        product.setPrice(-10.0);
+        assertThrows(BusinessException.class, () -> productUseCase.save(product));
+    }
+
+    @Test
     void update() {
         String id = "1";
         Product product = new Product();
@@ -71,11 +87,45 @@ class ProductUseCaseTest {
     }
 
     @Test
+    void find_withEmptyList_throwsProductNotFoundException() {
+        CategoryEnum categoryEnum = CategoryEnum.BURGERS;
+        when(findProductByCategoryOutPutPort.find(any(CategoryEnum.class))).thenReturn(Collections.emptyList());
+        assertThrows(ProductNotFoundException.class, () -> productUseCase.find(categoryEnum));
+    }
+
+    @Test
+    void find_withNonEmptyList_returnsProductList() {
+        CategoryEnum categoryEnum = CategoryEnum.BURGERS;
+        Product product = new Product();
+        when(findProductByCategoryOutPutPort.find(any(CategoryEnum.class))).thenReturn(Collections.singletonList(product));
+        List<Product> products = productUseCase.find(categoryEnum);
+       assertFalse(products.isEmpty());
+       assertEquals(1, products.size());
+       assertEquals(product, products.get(0));
+    }
+
+    @Test
     void FindById() {
         String id = "1";
         Product product = new Product();
         when(findProductByIdOutPutPort.find(anyString())).thenReturn(product);
         Product foundProduct = productUseCase.find(id);
         assertEquals(product, foundProduct);
+    }
+
+    @Test
+    void update_withInvalidPrice_throwsBusinessException() {
+        String id = "1";
+        Product product = new Product();
+        product.setPrice(0.0);
+        assertThrows(BusinessException.class, () -> productUseCase.update(id, product));
+    }
+
+    @Test
+    void update_withNegativePrice_throwsBusinessException() {
+        String id = "1";
+        Product product = new Product();
+        product.setPrice(-10.0);
+        assertThrows(BusinessException.class, () -> productUseCase.update(id, product));
     }
 }
