@@ -16,7 +16,7 @@
     <properties>
         <java.version>17</java.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
-        <sonar.organization>soatfiapg44</sonar.organization>
+        <sonar.organization>Soatfiap_ms-fb-cadastro</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <dependencyManagement>
