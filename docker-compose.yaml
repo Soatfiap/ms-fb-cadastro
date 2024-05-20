@@ -4,8 +4,6 @@ services:
     image: 4soatg44/ms-fb-cadastro:1.0.0
     ports:
       - "8082:8080"
-    depends_on:
-      - postgres
     environment:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/challenge"
       SPRING_DATASOURCE_USERNAME: "arch"
@@ -19,26 +17,13 @@ services:
       MERCADO_API: "https://api.mercadopago.com"
       SPRING_DATA_MONGODB_HOST: "44.212.233.147"
       SPRING_DATA_MONGODB_PORT: "27017"
-      SPRING_DATA_MONGODB_DATABASE: ""
-      SPRING_DATA_MONGODB_USERNAME: ""
-      SPRING_DATA_MONGODB_PASSWORD: ""
+      SPRING_DATA_MONGODB_DATABASE: "fastburger"
+      SPRING_DATA_MONGODB_USERNAME: "deckbuilder"
+      SPRING_DATA_MONGODB_PASSWORD: "gzeqPuVU6uju7nLxibTt"
       SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE: "admin"
     networks:
       - netChallenge
     restart: always
-
-  postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_DB: challenge
-      POSTGRES_USER: "arch"
-      POSTGRES_PASSWORD: "challenge"
-    ports:
-      - "5432:5432"
-    volumes:
-      - volume-db-challenge:/var/lib/postgresql/data
-    networks:
-      - netChallenge
 volumes:
   volume-db-challenge:
   valume-api-challenge:
