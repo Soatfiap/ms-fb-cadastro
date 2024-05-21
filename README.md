@@ -40,4 +40,6 @@ https://github.com/Soatfiap/ms-fb-checkout
 https://github.com/Soatfiap/ms-fb-order
 https://github.com/Soatfiap/ms-fb-cadastro 
 
-Atualizacao para commit.
+
+Link para sonar:
+https://sonarcloud.io/project/overview?id=Soatfiap_ms-fb-cadastro
