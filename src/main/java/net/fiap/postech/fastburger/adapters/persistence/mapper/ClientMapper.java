@@ -3,6 +3,7 @@ package net.fiap.postech.fastburger.adapters.persistence.mapper;
 import net.fiap.postech.fastburger.adapters.persistence.dto.ClientDTO;
 import net.fiap.postech.fastburger.adapters.persistence.dto.ClientResponseDTO;
 import net.fiap.postech.fastburger.adapters.persistence.entities.ClientEntity;
+import net.fiap.postech.fastburger.adapters.persistence.entities.ExclusaoDadosClientEntity;
 import net.fiap.postech.fastburger.application.domain.Client;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,13 @@ public class ClientMapper {
 
     public ClientResponseDTO toResponseDTO(ClientEntity clientEntity) {
         return modelMapper.map(clientEntity, ClientResponseDTO.class);
+    }
+
+    public ExclusaoDadosClientEntity toExclusaoDadosClientEntity(Client client) {
+        return modelMapper.map(client, ExclusaoDadosClientEntity.class);
+    }
+
+    public ClientEntity toClientEntity(Client client) {
+        return modelMapper.map(client, ClientEntity.class);
     }
 }

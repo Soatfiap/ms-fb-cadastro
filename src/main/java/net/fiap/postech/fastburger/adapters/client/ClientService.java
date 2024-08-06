@@ -8,6 +8,7 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminCreateUserRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminCreateUserResponse;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminDeleteUserRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AttributeType;
 
 @Service
@@ -40,6 +41,7 @@ public class ClientService {
         AdminCreateUserResponse response = cognitoClient.adminCreateUser(request);
         return response;
     }
+
     private static Result getResult(Client client) {
         AttributeType usernamePreferredAttribute = AttributeType.builder()
                 .name("preferred_username")
@@ -58,6 +60,22 @@ public class ClientService {
         Result result = new Result(usernamePreferredAttribute, emailAttribute, cpfAttribute);
         return result;
     }
+
+    public void deleteUserFromCognito(String username) {
+        AwsBasicCredentials auth = AwsBasicCredentials.create(awsClientId, awsClientSecret);
+        CognitoIdentityProviderClient cognitoClient = CognitoIdentityProviderClient.builder()
+                .credentialsProvider(() -> auth)
+                .region(Region.US_EAST_1)
+                .build();
+
+        AdminDeleteUserRequest request = AdminDeleteUserRequest.builder()
+                .userPoolId(awsUserPollCognito)
+                .username(username)
+                .build();
+
+        cognitoClient.adminDeleteUser(request);
+    }
+
     private record Result(AttributeType usernamePreferredAttribute, AttributeType emailAttribute, AttributeType cpfAttribute) {
     }
 }

@@ -29,7 +29,6 @@ import java.util.Optional;
 @Tag(name = "Client Controller Rest")
 public class ClientController {
 
-
     private SaveClientGateway saveClientGateway;
     private FindClientByCpfGateway findClientByCpfGateway;
     private ClientMapper clientMapper;
