@@ -13,26 +13,21 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "clients")
-
-public class ClientEntity {
+@Document(collection = "solicitacao_delecao_dados_clients_lgpd")
+public class ExclusaoDadosClientEntity {
 
     @Id
     @Field("_id")
     private String id;
 
-    @Indexed(unique = true)
-    @Field("cpf")
-    private String cpf;
-
     @Field("nome")
     private String nome;
 
     @Indexed(unique = true)
-    @Field("email")
-    private String email;
+    @Field("endereco")
+    private String endereco;
 
     @Indexed(unique = true)
-    @Field("cadastro-ativo")
-    private boolean ativo = true;
+    @Field("telefone")
+    private String telefone;
 }
