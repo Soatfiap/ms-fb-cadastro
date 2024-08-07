@@ -31,4 +31,8 @@ public class ClientEntity {
     @Indexed(unique = true)
     @Field("email")
     private String email;
+
+    @Indexed(unique = true)
+    @Field("cadastro-ativo")
+    private boolean ativo = true;
 }

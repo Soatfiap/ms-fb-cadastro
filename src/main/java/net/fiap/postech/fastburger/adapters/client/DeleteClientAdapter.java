@@ -25,6 +25,7 @@ public class DeleteClientAdapter implements DeleteClientOutPutPort {
         clientEntity.setCpf(client.getCpf());
         clientEntity.setNome(client.getNome());
         clientEntity.setEmail(client.getEmail());
-        this.clientRepository.delete(clientEntity);
+        clientEntity.setAtivo(false);
+        this.clientRepository.save(clientEntity);
     }
 }
